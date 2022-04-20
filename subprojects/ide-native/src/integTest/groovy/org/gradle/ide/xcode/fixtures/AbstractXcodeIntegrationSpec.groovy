@@ -29,12 +29,9 @@ import org.gradle.nativeplatform.fixtures.NativeBinaryFixture
 import org.gradle.nativeplatform.fixtures.ToolChainRequirement
 import org.gradle.nativeplatform.platform.internal.DefaultNativePlatform
 import org.gradle.test.fixtures.file.TestFile
-import org.gradle.util.Requires
-import org.gradle.util.TestPrecondition
 
 import static org.junit.Assume.assumeTrue
 
-@Requires(TestPrecondition.NOT_MAC_OS_X)
 class AbstractXcodeIntegrationSpec extends AbstractIntegrationSpec {
     AvailableToolChains.InstalledToolChain toolChain = null
 
