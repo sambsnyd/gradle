@@ -18,6 +18,7 @@ package org.gradle.api.reporting;
 
 import com.google.common.collect.Sets;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.NamedDomainObjectSet;
@@ -160,7 +161,7 @@ public class GenerateBuildDashboard extends DefaultTask implements Reporting<Bui
      * @return The reports container
      */
     @Override
-    public BuildDashboardReports reports(Closure closure) {
+    public BuildDashboardReports reports(@DelegatesTo(BuildDashboardReports.class) Closure closure) {
         return reports(new ClosureBackedAction<BuildDashboardReports>(closure));
     }
 

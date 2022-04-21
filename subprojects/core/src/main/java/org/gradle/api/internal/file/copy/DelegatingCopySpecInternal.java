@@ -17,6 +17,7 @@
 package org.gradle.api.internal.file.copy;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.Transformer;
 import org.gradle.api.file.CopyProcessingSpec;
@@ -100,7 +101,7 @@ public abstract class DelegatingCopySpecInternal implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec from(Object sourcePath, final Closure c) {
+    public CopySpec from(Object sourcePath, @DelegatesTo(CopySpec.class) final Closure c) {
         return getDelegateCopySpec().from(sourcePath, new ClosureBackedAction<>(c));
     }
 
@@ -165,7 +166,7 @@ public abstract class DelegatingCopySpecInternal implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec into(Object destPath, Closure configureClosure) {
+    public CopySpec into(Object destPath, @DelegatesTo(CopySpec.class) Closure configureClosure) {
         return getDelegateCopySpec().into(destPath, configureClosure);
     }
 
@@ -230,7 +231,7 @@ public abstract class DelegatingCopySpecInternal implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec eachFile(Closure closure) {
+    public CopySpec eachFile(@DelegatesTo(FileCopyDetails.class) Closure closure) {
         return getDelegateCopySpec().eachFile(closure);
     }
 

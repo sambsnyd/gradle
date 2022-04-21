@@ -17,6 +17,7 @@ package org.gradle.api.java.archives.internal;
 
 import com.google.common.collect.Sets;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.java.archives.Attributes;
@@ -71,7 +72,7 @@ public class DefaultManifestMergeSpec implements ManifestMergeSpec {
     }
 
     @Override
-    public ManifestMergeSpec eachEntry(Closure<?> mergeAction) {
+    public ManifestMergeSpec eachEntry(@DelegatesTo(ManifestMergeDetails.class) Closure<?> mergeAction) {
         return eachEntry(ConfigureUtil.configureUsing(mergeAction));
     }
 

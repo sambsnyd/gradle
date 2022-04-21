@@ -16,6 +16,7 @@
 package org.gradle.api.internal.file;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 import org.gradle.api.Action;
 import org.gradle.api.file.EmptyFileVisitor;
@@ -71,7 +72,7 @@ public abstract class AbstractFileTree extends AbstractFileCollection implements
     }
 
     @Override
-    public FileTree matching(Closure filterConfigClosure) {
+    public FileTree matching(@DelegatesTo(PatternFilterable.class) Closure filterConfigClosure) {
         return matching(configure(filterConfigClosure, patternSetFactory.create()));
     }
 
@@ -109,7 +110,7 @@ public abstract class AbstractFileTree extends AbstractFileCollection implements
     }
 
     @Override
-    public FileTree visit(Closure closure) {
+    public FileTree visit(@DelegatesTo(FileVisitDetails.class) Closure closure) {
         return visit(fileVisitorFrom(closure));
     }
 

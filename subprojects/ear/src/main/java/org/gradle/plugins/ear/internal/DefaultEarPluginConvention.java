@@ -16,6 +16,7 @@
 package org.gradle.plugins.ear.internal;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.model.ObjectFactory;
 import org.gradle.api.provider.Property;
@@ -103,7 +104,7 @@ public class DefaultEarPluginConvention extends org.gradle.plugins.ear.EarPlugin
     }
 
     @Override
-    public DefaultEarPluginConvention deploymentDescriptor(Closure configureClosure) {
+    public DefaultEarPluginConvention deploymentDescriptor(@DelegatesTo(DeploymentDescriptor.class) Closure configureClosure) {
         ConfigureUtil.configure(configureClosure, forceDeploymentDescriptor());
         return this;
     }

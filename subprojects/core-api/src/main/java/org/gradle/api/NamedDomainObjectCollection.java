@@ -16,6 +16,7 @@
 package org.gradle.api;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.provider.Provider;
 import org.gradle.api.specs.Spec;
 import org.gradle.api.tasks.Internal;
@@ -185,7 +186,7 @@ public interface NamedDomainObjectCollection<T> extends DomainObjectCollection<T
      * @param ruleAction The closure to execute to apply the rule.
      * @return The added rule.
      */
-    Rule addRule(String description, Closure ruleAction);
+    Rule addRule(String description, @DelegatesTo(String.class) Closure ruleAction);
 
     /**
      * Adds a rule to this collection. The given action is executed when an unknown object is requested by name. The

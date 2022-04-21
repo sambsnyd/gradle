@@ -16,6 +16,7 @@
 package org.gradle.api.invocation;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.BuildListener;
 import org.gradle.BuildResult;
 import org.gradle.StartParameter;
@@ -144,7 +145,7 @@ public interface Gradle extends PluginAware {
      *
      * @param closure The closure to execute.
      */
-    void beforeProject(Closure closure);
+    void beforeProject(@DelegatesTo(Project.class) Closure closure);
 
     /**
      * Adds an action to be called immediately before a project is evaluated.
@@ -162,7 +163,7 @@ public interface Gradle extends PluginAware {
      *
      * @param closure The closure to execute.
      */
-    void afterProject(Closure closure);
+    void afterProject(@DelegatesTo(Project.class) Closure closure);
 
     /**
      * Adds an action to be called immediately after a project is evaluated.
@@ -178,7 +179,7 @@ public interface Gradle extends PluginAware {
      * @param closure The action to execute.
      * @since 6.0
      */
-    void beforeSettings(Closure<?> closure);
+    void beforeSettings(@DelegatesTo(Settings.class) Closure<?> closure);
 
     /**
      * Adds an action to be called before the build settings have been loaded and evaluated.
@@ -196,7 +197,7 @@ public interface Gradle extends PluginAware {
      *
      * @param closure The closure to execute.
      */
-    void settingsEvaluated(Closure closure);
+    void settingsEvaluated(@DelegatesTo(Settings.class) Closure closure);
 
     /**
      * Adds an action to be called when the build settings have been loaded and evaluated.
@@ -230,7 +231,7 @@ public interface Gradle extends PluginAware {
      *
      * @param closure The closure to execute.
      */
-    void projectsLoaded(Closure closure);
+    void projectsLoaded(@DelegatesTo(Gradle.class) Closure closure);
 
     /**
      * Adds an action to be called when the projects for the build have been created from the settings.
@@ -250,7 +251,7 @@ public interface Gradle extends PluginAware {
      *
      * @param closure The closure to execute.
      */
-    void projectsEvaluated(Closure closure);
+    void projectsEvaluated(@DelegatesTo(Gradle.class) Closure closure);
 
     /**
      * Adds an action to be called when all projects for the build have been evaluated.
@@ -272,7 +273,7 @@ public interface Gradle extends PluginAware {
      * @deprecated This method is not supported when configuration caching is enabled.
      */
     @Deprecated
-    void buildFinished(Closure closure);
+    void buildFinished(@DelegatesTo(BuildResult.class) Closure closure);
 
     /**
      * Adds an action to be called when the build is completed.

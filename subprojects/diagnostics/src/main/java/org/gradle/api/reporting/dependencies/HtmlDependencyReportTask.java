@@ -17,6 +17,7 @@
 package org.gradle.api.reporting.dependencies;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.Incubating;
 import org.gradle.api.Project;
@@ -98,7 +99,7 @@ public class HtmlDependencyReportTask extends ConventionTask implements Reportin
 
     @Override
     @SuppressWarnings("rawtypes")
-    public DependencyReportContainer reports(Closure closure) {
+    public DependencyReportContainer reports(@DelegatesTo(DependencyReportContainer.class) Closure closure) {
         return reports(new ClosureBackedAction<>(closure));
     }
 

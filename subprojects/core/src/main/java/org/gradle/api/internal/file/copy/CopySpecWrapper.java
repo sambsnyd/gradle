@@ -18,6 +18,7 @@ package org.gradle.api.internal.file.copy;
 
 import com.google.common.annotations.VisibleForTesting;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.NonExtensible;
 import org.gradle.api.Transformer;
@@ -124,7 +125,7 @@ public class CopySpecWrapper implements SyncSpec {
     }
 
     @Override
-    public CopySpec from(Object sourcePath, final Closure c) {
+    public CopySpec from(Object sourcePath, @DelegatesTo(CopySpec.class) final Closure c) {
         return delegate.from(sourcePath, new ClosureBackedAction<>(c));
     }
 
@@ -200,7 +201,7 @@ public class CopySpecWrapper implements SyncSpec {
     }
 
     @Override
-    public CopySpec into(Object destPath, Closure configureClosure) {
+    public CopySpec into(Object destPath, @DelegatesTo(CopySpec.class) Closure configureClosure) {
         return delegate.into(destPath, configureClosure);
     }
 
@@ -280,7 +281,7 @@ public class CopySpecWrapper implements SyncSpec {
     }
 
     @Override
-    public CopySpec eachFile(Closure closure) {
+    public CopySpec eachFile(@DelegatesTo(FileCopyDetails.class) Closure closure) {
         delegate.eachFile(closure);
         return this;
     }

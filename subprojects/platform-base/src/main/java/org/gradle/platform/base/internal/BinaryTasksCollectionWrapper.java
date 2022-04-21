@@ -17,6 +17,7 @@
 package org.gradle.platform.base.internal;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.DomainObjectCollection;
 import org.gradle.api.DomainObjectSet;
@@ -102,7 +103,7 @@ public class BinaryTasksCollectionWrapper implements BinaryTasksCollection {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public <S extends Task> DomainObjectCollection<S> withType(Class<S> type, Closure configureClosure) {
+    public <S extends Task> DomainObjectCollection<S> withType(Class<S> type, @DelegatesTo(Task.class) Closure configureClosure) {
         return delegate.withType(type, configureClosure);
     }
 
@@ -113,7 +114,7 @@ public class BinaryTasksCollectionWrapper implements BinaryTasksCollection {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void whenObjectAdded(Closure action) {
+    public void whenObjectAdded(@DelegatesTo(Task.class) Closure action) {
         delegate.whenObjectAdded(action);
     }
 
@@ -124,7 +125,7 @@ public class BinaryTasksCollectionWrapper implements BinaryTasksCollection {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void whenObjectRemoved(Closure action) {
+    public void whenObjectRemoved(@DelegatesTo(Task.class) Closure action) {
         delegate.whenObjectRemoved(action);
     }
 
@@ -135,7 +136,7 @@ public class BinaryTasksCollectionWrapper implements BinaryTasksCollection {
 
     @SuppressWarnings("rawtypes")
     @Override
-    public void all(Closure action) {
+    public void all(@DelegatesTo(Task.class) Closure action) {
         delegate.all(action);
     }
 

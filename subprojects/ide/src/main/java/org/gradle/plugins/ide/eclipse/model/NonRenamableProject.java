@@ -16,6 +16,7 @@
 package org.gradle.plugins.ide.eclipse.model;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import groovy.util.Node;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
@@ -131,7 +132,7 @@ class NonRenamableProject extends Project {
     }
 
     @Override
-    public void transformAction(Closure action) {
+    public void transformAction(@DelegatesTo(XmlProvider.class) Closure action) {
         delegate.transformAction(action);
     }
 

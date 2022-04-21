@@ -16,6 +16,7 @@
 package org.gradle.api.tasks.bundling;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.file.CopySpec;
 import org.gradle.api.file.DirectoryProperty;
@@ -476,7 +477,7 @@ public abstract class AbstractArchiveTask extends AbstractCopyTask {
      * @return this
      */
     @Override
-    public AbstractArchiveTask into(Object destPath, Closure configureClosure) {
+    public AbstractArchiveTask into(Object destPath, @DelegatesTo(CopySpec.class) Closure configureClosure) {
         super.into(destPath, configureClosure);
         return this;
     }

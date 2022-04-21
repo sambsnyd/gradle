@@ -16,6 +16,7 @@
 package org.gradle.api.internal.file;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.file.FileTree;
 import org.gradle.api.file.FileVisitDetails;
@@ -54,7 +55,7 @@ public abstract class CompositeFileTree extends CompositeFileCollection implemen
     }
 
     @Override
-    public FileTree matching(final Closure filterConfigClosure) {
+    public FileTree matching(@DelegatesTo(PatternFilterable.class) final Closure filterConfigClosure) {
         return new FilteredFileTree(this, patternSetFactory, () -> {
             // For backwards compatibility, run the closure each time the file tree contents are queried
             return configure(filterConfigClosure, patternSetFactory.create());
@@ -84,7 +85,7 @@ public abstract class CompositeFileTree extends CompositeFileCollection implemen
     }
 
     @Override
-    public FileTree visit(Closure visitor) {
+    public FileTree visit(@DelegatesTo(FileVisitDetails.class) Closure visitor) {
         return visit(fileVisitorFrom(visitor));
     }
 

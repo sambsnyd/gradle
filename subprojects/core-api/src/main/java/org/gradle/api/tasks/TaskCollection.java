@@ -16,6 +16,7 @@
 package org.gradle.api.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.NamedDomainObjectSet;
 import org.gradle.api.Task;
@@ -80,7 +81,7 @@ public interface TaskCollection<T extends Task> extends NamedDomainObjectSet<T> 
      * @see #whenTaskAdded(Action)
      */
     @SuppressWarnings("UnusedDeclaration")
-    void whenTaskAdded(Closure closure);
+    void whenTaskAdded(@DelegatesTo(Task.class) Closure closure);
 
     /**
      * {@inheritDoc}

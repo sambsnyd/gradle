@@ -18,6 +18,7 @@ package org.gradle.api.internal.tasks;
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NamedDomainObjectCollectionSchema;
@@ -88,7 +89,7 @@ public class DefaultTaskCollection<T extends Task> extends DefaultNamedDomainObj
     }
 
     @Override
-    public void whenTaskAdded(Closure closure) {
+    public void whenTaskAdded(@DelegatesTo(Task.class) Closure closure) {
         whenObjectAdded(closure);
     }
 

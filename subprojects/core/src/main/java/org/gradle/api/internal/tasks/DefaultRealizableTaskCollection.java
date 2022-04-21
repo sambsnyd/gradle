@@ -17,6 +17,7 @@
 package org.gradle.api.internal.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.DomainObjectCollection;
 import org.gradle.api.InvalidUserDataException;
@@ -90,7 +91,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public T getByName(String name, Closure configureClosure) throws UnknownTaskException {
+    public T getByName(String name, @DelegatesTo(Task.class) Closure configureClosure) throws UnknownTaskException {
         return delegate.getByName(name, configureClosure);
     }
 
@@ -115,7 +116,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public void whenTaskAdded(Closure closure) {
+    public void whenTaskAdded(@DelegatesTo(Task.class) Closure closure) {
         delegate.whenTaskAdded(closure);
     }
 
@@ -175,7 +176,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public Rule addRule(String description, Closure ruleAction) {
+    public Rule addRule(String description, @DelegatesTo(String.class) Closure ruleAction) {
         return delegate.addRule(description, ruleAction);
     }
 
@@ -195,7 +196,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public <S extends T> DomainObjectCollection<S> withType(Class<S> type, Closure configureClosure) {
+    public <S extends T> DomainObjectCollection<S> withType(Class<S> type, @DelegatesTo(Task.class) Closure configureClosure) {
         return realizable(type, (DefaultTaskCollection<S>) delegate.withType(type, configureClosure));
     }
 
@@ -205,7 +206,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public void whenObjectAdded(Closure action) {
+    public void whenObjectAdded(@DelegatesTo(Task.class) Closure action) {
         delegate.whenObjectAdded(action);
     }
 
@@ -215,7 +216,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public void whenObjectRemoved(Closure action) {
+    public void whenObjectRemoved(@DelegatesTo(Task.class) Closure action) {
         delegate.whenObjectRemoved(action);
     }
 
@@ -225,7 +226,7 @@ public class DefaultRealizableTaskCollection<T extends Task> implements TaskColl
     }
 
     @Override
-    public void all(Closure action) {
+    public void all(@DelegatesTo(Task.class) Closure action) {
         delegate.all(action);
     }
 

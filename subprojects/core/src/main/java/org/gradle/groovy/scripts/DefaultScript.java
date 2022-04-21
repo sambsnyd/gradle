@@ -17,6 +17,7 @@
 package org.gradle.groovy.scripts;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.PathValidation;
 import org.gradle.api.Script;
@@ -204,7 +205,7 @@ public abstract class DefaultScript extends BasicScript {
     }
 
     @Override
-    public WorkResult copy(Closure closure) {
+    public WorkResult copy(@DelegatesTo(CopySpec.class) Closure closure) {
         return copy(ConfigureUtil.configureUsing(closure));
     }
 
@@ -240,7 +241,7 @@ public abstract class DefaultScript extends BasicScript {
     }
 
     @Override
-    public ExecResult javaexec(Closure closure) {
+    public ExecResult javaexec(@DelegatesTo(JavaExecSpec.class) Closure closure) {
         return processOperations.javaexec(ConfigureUtil.configureUsing(closure));
     }
 
@@ -250,7 +251,7 @@ public abstract class DefaultScript extends BasicScript {
     }
 
     @Override
-    public ExecResult exec(Closure closure) {
+    public ExecResult exec(@DelegatesTo(ExecSpec.class) Closure closure) {
         return processOperations.exec(ConfigureUtil.configureUsing(closure));
     }
 

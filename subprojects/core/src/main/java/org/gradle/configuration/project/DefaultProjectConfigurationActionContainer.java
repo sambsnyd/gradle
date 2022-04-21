@@ -17,6 +17,7 @@
 package org.gradle.configuration.project;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.internal.project.ProjectInternal;
 import org.gradle.util.internal.ConfigureUtil;
@@ -43,7 +44,7 @@ public class DefaultProjectConfigurationActionContainer implements ProjectConfig
     }
 
     @Override
-    public void add(Closure action) {
+    public void add(@DelegatesTo(ProjectInternal.class) Closure action) {
         add(ConfigureUtil.configureUsing(action));
     }
 }

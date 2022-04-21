@@ -17,6 +17,7 @@
 package org.gradle.api.internal.project;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.internal.plugins.DefaultObjectConfigurationAction;
 import org.gradle.api.internal.plugins.PluginAwareInternal;
@@ -31,7 +32,7 @@ import java.util.Map;
 public abstract class AbstractPluginAware implements PluginAwareInternal {
 
     @Override
-    public void apply(Closure closure) {
+    public void apply(@DelegatesTo(ObjectConfigurationAction.class) Closure closure) {
         apply(ConfigureUtil.configureUsing(closure));
     }
 

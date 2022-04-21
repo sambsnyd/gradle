@@ -16,6 +16,7 @@
 package org.gradle.api.plugins;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.DomainObjectSet;
 import org.gradle.api.Plugin;
@@ -63,7 +64,7 @@ public interface PluginCollection<T extends Plugin> extends DomainObjectSet<T> {
      * @param closure The closure to be called
      */
     @SuppressWarnings("UnusedDeclaration")
-    void whenPluginAdded(Closure closure);
+    void whenPluginAdded(@DelegatesTo(Plugin.class) Closure closure);
 
     /**
      * Unsupported.

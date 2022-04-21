@@ -16,6 +16,7 @@
 package org.gradle.plugins.ide.api;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.internal.PropertiesTransformer;
 import org.gradle.util.internal.ClosureBackedAction;
@@ -53,7 +54,7 @@ public class PropertiesFileContentMerger extends FileContentMerger {
      *
      * @param closure The closure to execute when the Properties have been created.
      */
-    public void withProperties(Closure closure) {
+    public void withProperties(@DelegatesTo(Properties.class) Closure closure) {
         withProperties(new ClosureBackedAction<Properties>(closure, Closure.OWNER_FIRST));
     }
 

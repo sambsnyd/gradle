@@ -16,6 +16,7 @@
 package org.gradle.api.execution;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.Task;
 
@@ -73,7 +74,7 @@ public interface TaskExecutionGraph {
      *
      * @param closure The closure to execute when this graph has been populated.
      */
-    void whenReady(Closure closure);
+    void whenReady(@DelegatesTo(TaskExecutionGraph.class) Closure closure);
 
     /**
      * <p>Adds an action to be called when this graph has been populated. This graph is passed to the action as a
@@ -93,7 +94,7 @@ public interface TaskExecutionGraph {
      * @deprecated This method is not supported when configuration caching is enabled.
      */
     @Deprecated
-    void beforeTask(Closure closure);
+    void beforeTask(@DelegatesTo(Task.class) Closure closure);
 
     /**
      * <p>Adds an action to be called immediately before a task is executed. The task is passed to the action as a
@@ -116,7 +117,7 @@ public interface TaskExecutionGraph {
      * @deprecated This method is not supported when configuration caching is enabled.
      */
     @Deprecated
-    void afterTask(Closure closure);
+    void afterTask(@DelegatesTo(Task.class) Closure closure);
 
     /**
      * <p>Adds an action to be called immediately after a task has executed. The task is passed to the action as the
