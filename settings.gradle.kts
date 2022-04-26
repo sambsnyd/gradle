@@ -3,7 +3,12 @@ import org.gradle.api.internal.FeaturePreviews
 pluginManagement {
     includeBuild("build-logic-settings")
     repositories {
+        mavenLocal()
         maven {
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+        }
+        mavenCentral()
+        maven {    
             url = uri("https://repo.gradle.org/gradle/enterprise-libs-release-candidates")
             content {
                 val rcAndMilestonesPattern = "\\d{1,2}?\\.\\d{1,2}?(\\.\\d{1,2}?)?-((rc-\\d{1,2}?)|(milestone-\\d{1,2}?))"
