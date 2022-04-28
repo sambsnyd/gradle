@@ -16,6 +16,7 @@
 package org.gradle.api.internal.artifacts.ivyservice;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.artifacts.Dependency;
 import org.gradle.api.artifacts.LenientConfiguration;
@@ -236,7 +237,7 @@ public class ErrorHandlingConfigurationResolver implements ConfigurationResolver
 
         @Override
         @SuppressWarnings("rawtypes")
-        public void allDependencies(Closure closure) {
+        public void allDependencies(@DelegatesTo(DependencyResult.class) Closure closure) {
             resolutionResult.allDependencies(closure);
         }
 
@@ -256,7 +257,7 @@ public class ErrorHandlingConfigurationResolver implements ConfigurationResolver
 
         @Override
         @SuppressWarnings("rawtypes")
-        public void allComponents(Closure closure) {
+        public void allComponents(@DelegatesTo(ResolvedComponentResult.class) Closure closure) {
             resolutionResult.allComponents(closure);
         }
 

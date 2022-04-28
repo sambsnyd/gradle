@@ -19,4 +19,22 @@ plugins {
     id("gradlebuild.ide") // Local development: Tweak IDEA import
     id("gradlebuild.dependency-analysis") // Auditing dependencies to find unused libraries
     id("gradlebuild.warmup-ec2") // Warm up EC2 AMI
+    id("org.openrewrite.rewrite")
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+    }
+    mavenCentral()
+}
+
+dependencies {
+    rewrite("org.openrewrite:rewrite-gradle:7.23.0-SNAPSHOT")
+}
+
+rewrite {
+    activeRecipe("org.openrewrite.gradle.AddDelegatesToGradleApi")
+    rewriteVersion = "7.23.0-SNAPSHOT"
 }

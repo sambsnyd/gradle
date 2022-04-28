@@ -19,6 +19,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Maps;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.apache.commons.lang.StringUtils;
 import org.gradle.api.Action;
 import org.gradle.api.DefaultTask;
@@ -350,7 +351,7 @@ public class DefaultTaskContainer extends DefaultTaskCollection<Task> implements
     }
 
     @Override
-    public Task create(String name, Closure configureClosure) {
+    public Task create(String name, @DelegatesTo(Task.class) Closure configureClosure) {
         assertMutable("create(String, Closure)");
         return doCreate(name, DefaultTask.class, NO_ARGS, ConfigureUtil.configureUsing(configureClosure));
     }
@@ -646,7 +647,7 @@ public class DefaultTaskContainer extends DefaultTaskCollection<Task> implements
     }
 
     @Override
-    public void whenObjectRemoved(Closure action) {
+    public void whenObjectRemoved(@DelegatesTo(Task.class) Closure action) {
         throw new UnsupportedOperationException("Registering actions on task removal is not supported.");
     }
 

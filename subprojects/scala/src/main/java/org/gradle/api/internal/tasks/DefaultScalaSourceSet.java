@@ -16,6 +16,7 @@
 package org.gradle.api.internal.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.model.ObjectFactory;
@@ -51,7 +52,7 @@ public class DefaultScalaSourceSet implements org.gradle.api.tasks.ScalaSourceSe
 
     @Override
     @SuppressWarnings("rawtypes")
-    public org.gradle.api.tasks.ScalaSourceSet scala(Closure configureClosure) {
+    public org.gradle.api.tasks.ScalaSourceSet scala(@DelegatesTo(SourceDirectorySet.class) Closure configureClosure) {
         configure(configureClosure, getScala());
         return this;
     }

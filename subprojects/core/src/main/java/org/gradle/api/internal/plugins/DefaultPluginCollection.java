@@ -16,6 +16,7 @@
 package org.gradle.api.internal.plugins;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.internal.CollectionCallbackActionDecorator;
@@ -83,7 +84,7 @@ class DefaultPluginCollection<T extends Plugin> extends DefaultDomainObjectSet<T
     }
 
     @Override
-    public void whenPluginAdded(Closure closure) {
+    public void whenPluginAdded(@DelegatesTo(Plugin.class) Closure closure) {
         whenObjectAdded(closure);
     }
 

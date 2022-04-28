@@ -20,6 +20,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.NonExtensible;
@@ -146,7 +147,7 @@ public class DefaultCopySpec implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec from(Object sourcePath, Closure c) {
+    public CopySpec from(Object sourcePath, @DelegatesTo(CopySpec.class) Closure c) {
         return from(sourcePath, new ClosureBackedAction<>(c));
     }
 
@@ -244,7 +245,7 @@ public class DefaultCopySpec implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec into(Object destPath, Closure configureClosure) {
+    public CopySpec into(Object destPath, @DelegatesTo(CopySpec.class) Closure configureClosure) {
         return into(destPath, new ClosureBackedAction<>(configureClosure));
     }
 
@@ -504,7 +505,7 @@ public class DefaultCopySpec implements CopySpecInternal {
     }
 
     @Override
-    public CopySpec eachFile(Closure closure) {
+    public CopySpec eachFile(@DelegatesTo(FileCopyDetails.class) Closure closure) {
         appendCopyAction(ConfigureUtil.configureUsing(closure));
         return this;
     }

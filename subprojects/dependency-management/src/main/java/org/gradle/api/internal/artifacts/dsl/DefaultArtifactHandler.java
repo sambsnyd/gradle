@@ -17,6 +17,7 @@
 package org.gradle.api.internal.artifacts.dsl;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.artifacts.ConfigurablePublishArtifact;
 import org.gradle.api.artifacts.Configuration;
@@ -49,7 +50,7 @@ public class DefaultArtifactHandler implements ArtifactHandler, MethodMixIn {
     }
 
     @SuppressWarnings("rawtypes")
-    private PublishArtifact pushArtifact(org.gradle.api.artifacts.Configuration configuration, Object notation, Closure configureClosure) {
+    private PublishArtifact pushArtifact(org.gradle.api.artifacts.Configuration configuration, Object notation, @DelegatesTo(ConfigurablePublishArtifact.class) Closure configureClosure) {
         Action<Object> configureAction = ConfigureUtil.configureUsing(configureClosure);
         return pushArtifact(configuration, notation, configureAction);
     }
@@ -84,7 +85,7 @@ public class DefaultArtifactHandler implements ArtifactHandler, MethodMixIn {
 
     @Override
     @SuppressWarnings("rawtypes")
-    public PublishArtifact add(String configurationName, Object artifactNotation, Closure configureClosure) {
+    public PublishArtifact add(String configurationName, Object artifactNotation, @DelegatesTo(ConfigurablePublishArtifact.class) Closure configureClosure) {
         return pushArtifact(configurationContainer.getByName(configurationName), artifactNotation, configureClosure);
     }
 

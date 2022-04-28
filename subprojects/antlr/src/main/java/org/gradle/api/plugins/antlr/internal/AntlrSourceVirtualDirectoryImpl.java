@@ -16,6 +16,7 @@
 package org.gradle.api.plugins.antlr.internal;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.model.ObjectFactory;
@@ -52,7 +53,7 @@ public class AntlrSourceVirtualDirectoryImpl implements org.gradle.api.plugins.a
 
     @Override
     @SuppressWarnings("rawtypes")
-    public org.gradle.api.plugins.antlr.AntlrSourceVirtualDirectory antlr(Closure configureClosure) {
+    public org.gradle.api.plugins.antlr.AntlrSourceVirtualDirectory antlr(@DelegatesTo(SourceDirectorySet.class) Closure configureClosure) {
         ConfigureUtil.configure(configureClosure, getAntlr());
         return this;
     }

@@ -21,6 +21,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.Describable;
 import org.gradle.api.DomainObjectSet;
@@ -1300,7 +1301,7 @@ public class DefaultConfiguration extends AbstractFileCollection implements Conf
     }
 
     @Override
-    public Configuration resolutionStrategy(Closure closure) {
+    public Configuration resolutionStrategy(@DelegatesTo(ResolutionStrategy.class) Closure closure) {
         configure(closure, getResolutionStrategy());
         return this;
     }
@@ -1796,7 +1797,7 @@ public class DefaultConfiguration extends AbstractFileCollection implements Conf
         }
 
         @Override
-        public void beforeResolve(Closure action) {
+        public void beforeResolve(@DelegatesTo(ResolvableDependencies.class) Closure action) {
             beforeResolve(ConfigureUtil.configureUsing(action));
         }
 
@@ -1806,7 +1807,7 @@ public class DefaultConfiguration extends AbstractFileCollection implements Conf
         }
 
         @Override
-        public void afterResolve(Closure action) {
+        public void afterResolve(@DelegatesTo(ResolvableDependencies.class) Closure action) {
             afterResolve(ConfigureUtil.configureUsing(action));
         }
 
@@ -1986,7 +1987,7 @@ public class DefaultConfiguration extends AbstractFileCollection implements Conf
             }
 
             @Override
-            public void allDependencies(Closure closure) {
+            public void allDependencies(@DelegatesTo(DependencyResult.class) Closure closure) {
                 resolve();
                 delegate.allDependencies(closure);
             }
@@ -2004,7 +2005,7 @@ public class DefaultConfiguration extends AbstractFileCollection implements Conf
             }
 
             @Override
-            public void allComponents(Closure closure) {
+            public void allComponents(@DelegatesTo(ResolvedComponentResult.class) Closure closure) {
                 resolve();
                 delegate.allComponents(closure);
             }

@@ -17,6 +17,7 @@
 package org.gradle.api.internal.artifacts.result;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.artifacts.result.DependencyResult;
 import org.gradle.api.artifacts.result.ResolutionResult;
@@ -68,7 +69,7 @@ public class DefaultResolutionResult implements ResolutionResult {
     }
 
     @Override
-    public void allDependencies(final Closure closure) {
+    public void allDependencies(@DelegatesTo(DependencyResult.class) final Closure closure) {
         allDependencies(ConfigureUtil.configureUsing(closure));
     }
 
@@ -102,7 +103,7 @@ public class DefaultResolutionResult implements ResolutionResult {
     }
 
     @Override
-    public void allComponents(final Closure closure) {
+    public void allComponents(@DelegatesTo(ResolvedComponentResult.class) final Closure closure) {
         allComponents(ConfigureUtil.configureUsing(closure));
     }
 

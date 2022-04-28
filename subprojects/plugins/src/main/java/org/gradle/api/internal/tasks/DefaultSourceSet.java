@@ -16,6 +16,7 @@
 package org.gradle.api.internal.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.apache.commons.lang.StringUtils;
 import org.gradle.api.Action;
 import org.gradle.api.file.FileCollection;
@@ -255,7 +256,7 @@ public abstract class DefaultSourceSet implements SourceSet {
     }
 
     @Override
-    public SourceSet java(@Nullable Closure configureClosure) {
+    public SourceSet java(@Nullable@DelegatesTo(SourceDirectorySet.class) Closure configureClosure) {
         configure(configureClosure, getJava());
         return this;
     }
@@ -277,7 +278,7 @@ public abstract class DefaultSourceSet implements SourceSet {
     }
 
     @Override
-    public SourceSet resources(@Nullable Closure configureClosure) {
+    public SourceSet resources(@Nullable@DelegatesTo(SourceDirectorySet.class) Closure configureClosure) {
         configure(configureClosure, getResources());
         return this;
     }

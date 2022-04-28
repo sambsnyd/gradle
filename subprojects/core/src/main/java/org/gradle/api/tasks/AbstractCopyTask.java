@@ -16,6 +16,7 @@
 package org.gradle.api.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.GradleException;
 import org.gradle.api.NonNullApi;
@@ -282,7 +283,7 @@ public abstract class AbstractCopyTask extends ConventionTask implements CopySpe
      * {@inheritDoc}
      */
     @Override
-    public AbstractCopyTask from(Object sourcePath, Closure c) {
+    public AbstractCopyTask from(Object sourcePath, @DelegatesTo(CopySpec.class) Closure c) {
         getMainSpec().from(sourcePath, new ClosureBackedAction<>(c));
         return this;
     }
@@ -318,7 +319,7 @@ public abstract class AbstractCopyTask extends ConventionTask implements CopySpe
      * {@inheritDoc}
      */
     @Override
-    public AbstractCopyTask into(Object destPath, Closure configureClosure) {
+    public AbstractCopyTask into(Object destPath, @DelegatesTo(CopySpec.class) Closure configureClosure) {
         getMainSpec().into(destPath, configureClosure);
         return this;
     }
@@ -578,7 +579,7 @@ public abstract class AbstractCopyTask extends ConventionTask implements CopySpe
      * {@inheritDoc}
      */
     @Override
-    public AbstractCopyTask eachFile(Closure closure) {
+    public AbstractCopyTask eachFile(@DelegatesTo(FileCopyDetails.class) Closure closure) {
         getMainSpec().eachFile(closure);
         return this;
     }

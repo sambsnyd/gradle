@@ -13,4 +13,6 @@ dependencies {
     }
 
     implementation("com.autonomousapps:dependency-analysis-gradle-plugin")
+    implementation("org.openrewrite:plugin:5.20.0")
+    implementation("io.moderne:moderne-gradle-plugin:0.12.0")
 }

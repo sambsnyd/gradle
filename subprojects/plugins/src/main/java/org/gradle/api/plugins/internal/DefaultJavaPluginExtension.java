@@ -18,6 +18,7 @@ package org.gradle.api.plugins.internal;
 
 import com.google.common.collect.ImmutableList;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.JavaVersion;
@@ -168,7 +169,7 @@ public class DefaultJavaPluginExtension implements JavaPluginExtension {
     }
 
     @Override
-    public Manifest manifest(Closure closure) {
+    public Manifest manifest(@DelegatesTo(Manifest.class) Closure closure) {
         return configure(closure, createManifest());
     }
 

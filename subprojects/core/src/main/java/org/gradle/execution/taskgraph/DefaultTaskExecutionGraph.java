@@ -19,6 +19,7 @@ package org.gradle.execution.taskgraph;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.NonNullApi;
 import org.gradle.api.Task;
@@ -167,7 +168,7 @@ public class DefaultTaskExecutionGraph implements TaskExecutionGraphInternal {
     }
 
     @Override
-    public void whenReady(final Closure closure) {
+    public void whenReady(@DelegatesTo(TaskExecutionGraph.class) final Closure closure) {
         graphListeners.add(
             new ClosureBackedMethodInvocationDispatch(
                 "graphPopulated",
@@ -198,7 +199,7 @@ public class DefaultTaskExecutionGraph implements TaskExecutionGraphInternal {
     }
 
     @Override
-    public void beforeTask(final Closure closure) {
+    public void beforeTask(@DelegatesTo(Task.class) final Closure closure) {
         notifyListenerRegistration("TaskExecutionGraph.beforeTask", closure);
         taskListeners.add(new ClosureBackedMethodInvocationDispatch("beforeExecute", closure));
     }
@@ -215,7 +216,7 @@ public class DefaultTaskExecutionGraph implements TaskExecutionGraphInternal {
     }
 
     @Override
-    public void afterTask(final Closure closure) {
+    public void afterTask(@DelegatesTo(Task.class) final Closure closure) {
         notifyListenerRegistration("TaskExecutionGraph.afterTask", closure);
         taskListeners.add(new ClosureBackedMethodInvocationDispatch("afterExecute", closure));
     }

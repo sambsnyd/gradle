@@ -17,6 +17,7 @@
 package org.gradle.api.java.archives.internal;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.apache.commons.io.FileUtils;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
@@ -182,7 +183,7 @@ public class DefaultManifest implements ManifestInternal {
     }
 
     @Override
-    public DefaultManifest from(Object mergePaths, Closure<?> closure) {
+    public DefaultManifest from(Object mergePaths, @DelegatesTo(ManifestMergeSpec.class) Closure<?> closure) {
         return from(mergePaths, ClosureBackedAction.<ManifestMergeSpec>of(closure));
     }
 

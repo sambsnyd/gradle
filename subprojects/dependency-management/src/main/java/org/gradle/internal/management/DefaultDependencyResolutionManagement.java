@@ -18,6 +18,7 @@ package org.gradle.internal.management;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.ActionConfiguration;
 import org.gradle.api.InvalidUserCodeException;
@@ -238,7 +239,7 @@ public class DefaultDependencyResolutionManagement implements DependencyResoluti
         }
 
         @Override
-        public ComponentMetadataHandler all(Closure<?> rule) {
+        public ComponentMetadataHandler all(@DelegatesTo(ComponentMetadataDetails.class) Closure<?> rule) {
             components(h -> h.all(rule));
             return this;
         }
@@ -268,7 +269,7 @@ public class DefaultDependencyResolutionManagement implements DependencyResoluti
         }
 
         @Override
-        public ComponentMetadataHandler withModule(Object id, Closure<?> rule) {
+        public ComponentMetadataHandler withModule(Object id, @DelegatesTo(ComponentMetadataDetails.class) Closure<?> rule) {
             components(h -> h.withModule(id, rule));
             return this;
         }

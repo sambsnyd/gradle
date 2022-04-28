@@ -17,6 +17,7 @@ package org.gradle.api.internal.artifacts.dependencies;
 
 import com.google.common.base.Objects;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserCodeException;
 import org.gradle.api.artifacts.DependencyArtifact;
@@ -125,7 +126,7 @@ public abstract class AbstractModuleDependency extends AbstractDependency implem
     }
 
     @Override
-    public DependencyArtifact artifact(Closure configureClosure) {
+    public DependencyArtifact artifact(@DelegatesTo(DependencyArtifact.class) Closure configureClosure) {
         return artifact(configureUsing(configureClosure));
     }
 

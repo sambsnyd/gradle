@@ -16,6 +16,7 @@
 package org.gradle.api.internal.tasks;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.file.SourceDirectorySet;
 import org.gradle.api.model.ObjectFactory;
@@ -53,7 +54,7 @@ public class DefaultGroovySourceSet implements GroovySourceSet, HasPublicType {
     }
 
     @Override
-    public GroovySourceSet groovy(@Nullable Closure configureClosure) {
+    public GroovySourceSet groovy(@Nullable@DelegatesTo(SourceDirectorySet.class) Closure configureClosure) {
         configure(configureClosure, getGroovy());
         return this;
     }

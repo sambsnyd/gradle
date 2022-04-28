@@ -17,6 +17,7 @@
 package org.gradle.api.plugins.internal;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.JavaVersion;
 import org.gradle.api.file.DirectoryProperty;
@@ -105,7 +106,7 @@ public class DefaultJavaPluginConvention extends JavaPluginConvention implements
     }
 
     @Override
-    public Manifest manifest(Closure closure) {
+    public Manifest manifest(@DelegatesTo(Manifest.class) Closure closure) {
         return extension.manifest(closure);
     }
 

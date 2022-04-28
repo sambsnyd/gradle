@@ -17,6 +17,7 @@ package org.gradle.api.internal.artifacts.dsl;
 
 import com.google.common.collect.Lists;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserCodeException;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
@@ -75,7 +76,7 @@ public class DefaultRepositoryHandler extends DefaultArtifactRepositoryContainer
 
     @Override
     @SuppressWarnings("rawtypes")
-    public FlatDirectoryArtifactRepository flatDir(Closure configureClosure) {
+    public FlatDirectoryArtifactRepository flatDir(@DelegatesTo(FlatDirectoryArtifactRepository.class) Closure configureClosure) {
         return flatDir(ConfigureUtil.configureUsing(configureClosure));
     }
 
@@ -163,7 +164,7 @@ public class DefaultRepositoryHandler extends DefaultArtifactRepositoryContainer
 
     @Override
     @SuppressWarnings("rawtypes")
-    public MavenArtifactRepository maven(Closure closure) {
+    public MavenArtifactRepository maven(@DelegatesTo(MavenArtifactRepository.class) Closure closure) {
         return maven(ConfigureUtil.configureUsing(closure));
     }
 
@@ -174,7 +175,7 @@ public class DefaultRepositoryHandler extends DefaultArtifactRepositoryContainer
 
     @Override
     @SuppressWarnings("rawtypes")
-    public IvyArtifactRepository ivy(Closure closure) {
+    public IvyArtifactRepository ivy(@DelegatesTo(IvyArtifactRepository.class) Closure closure) {
         return ivy(ConfigureUtil.configureUsing(closure));
     }
 

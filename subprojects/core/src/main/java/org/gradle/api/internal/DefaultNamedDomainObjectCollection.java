@@ -19,6 +19,7 @@ import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import org.gradle.api.Action;
 import org.gradle.api.InvalidUserDataException;
 import org.gradle.api.Named;
@@ -457,7 +458,7 @@ public class DefaultNamedDomainObjectCollection<T> extends DefaultDomainObjectCo
     }
 
     @Override
-    public Rule addRule(final String description, final Closure ruleAction) {
+    public Rule addRule(final String description, @DelegatesTo(String.class) final Closure ruleAction) {
         return addRule(new RuleAdapter(description) {
             @Override
             public void apply(String domainObjectName) {

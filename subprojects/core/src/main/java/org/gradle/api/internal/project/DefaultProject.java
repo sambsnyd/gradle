@@ -19,6 +19,7 @@ package org.gradle.api.internal.project;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import groovy.lang.MissingPropertyException;
 import org.gradle.api.Action;
 import org.gradle.api.AntBuilder;
@@ -688,7 +689,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public void allprojects(Closure configureClosure) {
+    public void allprojects(@DelegatesTo(Project.class) Closure configureClosure) {
         allprojects(this, ConfigureUtil.configureUsing(configureClosure));
     }
 
@@ -713,7 +714,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public void subprojects(Closure configureClosure) {
+    public void subprojects(@DelegatesTo(Project.class) Closure configureClosure) {
         subprojects(this, ConfigureUtil.configureUsing(configureClosure));
     }
 
@@ -940,7 +941,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public ConfigurableFileCollection files(Object paths, Closure closure) {
+    public ConfigurableFileCollection files(Object paths, @DelegatesTo(ConfigurableFileCollection.class) Closure closure) {
         return ConfigureUtil.configure(closure, files(paths));
     }
 
@@ -957,7 +958,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public ConfigurableFileTree fileTree(Object baseDir, Closure closure) {
+    public ConfigurableFileTree fileTree(Object baseDir, @DelegatesTo(ConfigurableFileTree.class) Closure closure) {
         return ConfigureUtil.configure(closure, fileTree(baseDir));
     }
 
@@ -1051,13 +1052,13 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public void beforeEvaluate(Closure closure) {
+    public void beforeEvaluate(@DelegatesTo(Project.class) Closure closure) {
         assertMutatingMethodAllowed("beforeEvaluate(Closure)");
         evaluationListener.add(new ClosureBackedMethodInvocationDispatch("beforeEvaluate", getListenerBuildOperationDecorator().decorate("Project.beforeEvaluate", Cast.<Closure<?>>uncheckedNonnullCast(closure))));
     }
 
     @Override
-    public void afterEvaluate(Closure closure) {
+    public void afterEvaluate(@DelegatesTo(Project.class) Closure closure) {
         assertMutatingMethodAllowed("afterEvaluate(Closure)");
         failAfterProjectIsEvaluated("afterEvaluate(Closure)");
         evaluationListener.add(new ClosureBackedMethodInvocationDispatch("afterEvaluate", getListenerBuildOperationDecorator().decorate("Project.afterEvaluate", Cast.<Closure<?>>uncheckedNonnullCast(closure))));
@@ -1118,7 +1119,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public WorkResult copy(Closure closure) {
+    public WorkResult copy(@DelegatesTo(CopySpec.class) Closure closure) {
         return copy(configureUsing(closure));
     }
 
@@ -1133,7 +1134,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public CopySpec copySpec(Closure closure) {
+    public CopySpec copySpec(@DelegatesTo(CopySpec.class) Closure closure) {
         return ConfigureUtil.configure(closure, copySpec());
     }
 
@@ -1152,7 +1153,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     public abstract ProcessOperations getProcessOperations();
 
     @Override
-    public ExecResult javaexec(Closure closure) {
+    public ExecResult javaexec(@DelegatesTo(JavaExecSpec.class) Closure closure) {
         return javaexec(configureUsing(closure));
     }
 
@@ -1162,7 +1163,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public ExecResult exec(Closure closure) {
+    public ExecResult exec(@DelegatesTo(ExecSpec.class) Closure closure) {
         return exec(configureUsing(closure));
     }
 
@@ -1186,7 +1187,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     public abstract DependencyMetaDataProvider getDependencyMetaDataProvider();
 
     @Override
-    public AntBuilder ant(Closure configureClosure) {
+    public AntBuilder ant(@DelegatesTo(AntBuilder.class) Closure configureClosure) {
         return ConfigureUtil.configure(configureClosure, getAnt());
     }
 
@@ -1198,7 +1199,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public Project project(String path, Closure configureClosure) {
+    public Project project(String path, @DelegatesTo(Project.class) Closure configureClosure) {
         return project(this, path, ConfigureUtil.configureUsing(configureClosure));
     }
 
@@ -1243,7 +1244,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public void artifacts(Closure configureClosure) {
+    public void artifacts(@DelegatesTo(ArtifactHandler.class) Closure configureClosure) {
         ConfigureUtil.configure(configureClosure, getArtifacts());
     }
 
@@ -1272,7 +1273,7 @@ public abstract class DefaultProject extends AbstractPluginAware implements Proj
     }
 
     @Override
-    public Task task(String task, Closure configureClosure) {
+    public Task task(String task, @DelegatesTo(Task.class) Closure configureClosure) {
         return taskContainer.create(task).configure(configureClosure);
     }
 

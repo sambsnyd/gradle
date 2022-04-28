@@ -17,6 +17,7 @@
 package org.gradle.api;
 
 import groovy.lang.Closure;
+import groovy.lang.DelegatesTo;
 import groovy.lang.MissingPropertyException;
 import org.gradle.api.internal.TaskInputsInternal;
 import org.gradle.api.internal.TaskOutputsInternal;
@@ -295,12 +296,12 @@ public class DefaultTask extends org.gradle.api.internal.AbstractTask implements
     }
 
     @Override
-    public Task doFirst(Closure action) {
+    public Task doFirst(@DelegatesTo(Task.class) Closure action) {
         return super.doFirst(action);
     }
 
     @Override
-    public Task doLast(Closure action) {
+    public Task doLast(@DelegatesTo(Task.class) Closure action) {
         return super.doLast(action);
     }
 
