@@ -174,6 +174,7 @@ public interface Gradle extends PluginAware {
 
     /**
      * Adds an action to be called before the build settings have been loaded and evaluated.
+     * The {@link Settings} object is passed to the closure as its parameter.
      *
      * @param closure The action to execute.
      * @since 6.0
